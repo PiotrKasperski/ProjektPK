@@ -20,7 +20,8 @@ struct Driver *loadDataFromFile(char *fileName, struct Driver *list) {
         while (!feof(file)) {
             char *result = (char *) malloc(sizeof(char) * 255);
             fgets(result, 255, file);
-            if(strcmp(result,"")!=0){                                           //sprawdzenie czy linijka nie byla pusta
+            if (strcmp(result, "") != 0 && strcmp(result, "\n") !=
+                                           0) {                                           //sprawdzenie czy linijka nie byla pusta
                 int position = atoi(strtok(result, ", "));
                 char *driverName = strtok(NULL, ",");
                 deleteLast(driverName, '\n');
