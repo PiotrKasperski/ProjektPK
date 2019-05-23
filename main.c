@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 void showHelp() {
     printf("Aby wczytac protokoly zawodow uzyj przelacznika -i\n"
            "PRZYKLAD UZYCIA:\n"
-           "PROJEKT -i \"protokol1.txt\" \"protokol2\"\n"
+           "Race -i \"protokol1.txt\" \"protokol2\"\n"
            "Program wczyta wyniki z protokolow i zapisze je w plikach: NazwaKierowcy1.txt NazwaKierowcy2.txt\n");
 }
 //TODO refaktor

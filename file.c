@@ -20,19 +20,23 @@ struct Driver *loadDataFromFile(char *fileName, struct Driver *list) {
         while (!feof(file)) {
             char *result = (char *) malloc(sizeof(char) * 255);
             fgets(result, 255, file);
-            int position = atoi(strtok(result, ", "));
-            char *driverName = strtok(NULL, ",");
-            deleteLast(driverName, '\n');
-            deleteFirst(driverName);
-            int startPosition = atoi(strtok(NULL, ", "));
-            char *time = strtok(NULL, ", ");
-            deleteLast(time, '\n');
+            if(strcmp(result,"")!=0){                                           //sprawdzenie czy linijka nie byla pusta
+                int position = atoi(strtok(result, ", "));
+                char *driverName = strtok(NULL, ",");
+                deleteLast(driverName, '\n');
+                deleteFirst(driverName);
+                int startPosition = atoi(strtok(NULL, ", "));
+                char *time = strtok(NULL, ", ");
+                deleteLast(time, '\n');
 
-            list = addDriverScore(list, driverName, raceName, date, time, position, startPosition - position);
+                list = addDriverScore(list, driverName, raceName, date, time, position, startPosition - position);
+            }
+
 
         }
+        fclose(file);
     }
-    fclose(file);
+
     return list;
 }
 
@@ -80,8 +84,9 @@ void saveDriverResultToFile(struct Driver *list) {
                     list->score->next->time, list->score->next->position,sign,list->score->next->differenceInPosition);
             list->score = list->score->next;
         }
+        fclose(file);
     }
-    fclose(file);
+
 };
 void saveDriverList(struct Driver *list){
     if(list!=NULL){
