@@ -1,0 +1,23 @@
+Rajdy samochodowe
+Napisać program do raportowania wyników w rajdach samochodowych.
+Po zakończeniu rajdu tworzona jest lista rankingowa w następującej postaci:
+W pierwszej linii jest nazwa wyścigu, w drugiej jego data ( w formacie rrrr-mm-dd), w kolejnych
+wyniki samochodów:
+<miejsce na mecie>, <Nazwisko kierowcy>, <pozycja startowa w zawodach>, <czas (w formacie
+gg:mm:ss>
+Przykładowy plik ma postać:
+Rajd Noworoczny
+2010-01-01
+2, Kowalski, 3, 00:12:43
+1, Nowak, 2, 00:13:15
+3, Nowakowski, 2, 00:14:01
+Plików z wynikami zawodów może być dowolna liczba. Po wykonaniu programu uzyskujemy raporty
+zawierające wyniki dla zawodników . W tym pliku jest w pierwszej linijce nazwisko a w kolejnych
+wyniki które uzyskał na zawodach. Wyniki przedstawione są w natępującej postaci:
+<data> <Nazwa wyścigu><czas><miejsce na mecie><różnica między pozycją startową a miejscem na
+mecie>
+Kowalski
+2010-01-01 Rajd Noworoczny 00:12:43 1 +1
+2010-01-15 Rajd Styczniowy 00:20:21 4 -3
+Program uruchamiany jest z linii poleceń z wykorzystaniem przełącznika:
+-i pliki wejściowe z protokołami zawodów
