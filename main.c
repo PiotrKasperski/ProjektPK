@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include "driver.h"
-#include "raceScore.h"
 #include "file.h"
 
 void showHelp();
 
 int main(int argc, char **argv) {
-    struct Driver *drivers = NULL;
+    Driver *drivers = NULL;
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) showHelp();
         if (strcmp(argv[i], "-i") == 0) {

@@ -4,9 +4,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "file.h"
-#include "driver.h"
 
-struct Driver *loadDataFromFile(char *fileName, struct Driver *list) {
+
+Driver *loadDataFromFile(char *fileName, Driver *list) {
     FILE *file;
     if ((file = fopen(fileName, "rt")) == NULL) {
         printf("Nie mozna otworzyc pliku %s \n", fileName);
@@ -20,76 +20,47 @@ struct Driver *loadDataFromFile(char *fileName, struct Driver *list) {
         while (!feof(file)) {
             char *result = (char *) malloc(sizeof(char) * 255);
             fgets(result, 255, file);
-            if (strcmp(result, "") != 0 && strcmp(result, "\n") !=
-                                           0) {                                           //sprawdzenie czy linijka nie byla pusta
-                int position = atoi(strtok(result, ", "));
-                char *driverName = strtok(NULL, ",");
-                deleteLast(driverName, '\n');
-                deleteFirst(driverName);
-                int startPosition = atoi(strtok(NULL, ", "));
-                char *time = strtok(NULL, ", ");
-                deleteLast(time, '\n');
+            list = saveResults(result, raceName, date, list);
 
-                list = addDriverScore(list, driverName, raceName, date, time, position, startPosition - position);
             }
 
-
-        }
         fclose(file);
     }
 
     return list;
 }
 
-void deleteLast(char *str, const char ch) {
-    int len = strlen(str);
-    char *ptr = str + (len - 1);
-    while (*ptr == ch) *ptr-- = '\0';
-}
 
-void deleteFirst(char *str) {
-    int len = strlen(str), i = 0;
-    if (str[0] == ' ') {
-        while (i <= len || str[i] == '\0') {
-            str[i] = str[i + 1];
-            i++;
-
-        }
-    }
-
-}
-char *getSign(int i){
+static char *getSign(int i) {
     if (i>0) return "+";
     return "";
 }
 
-void saveDriverResultToFile(struct Driver *list) {
+static void saveDriverResultToFile(Driver *list) {
     FILE *file;
     char *filename;
     filename = (char*)malloc(sizeof(char)*255);
-    char *sign;
-    sign = (char*)malloc(sizeof(char));
     strcpy(filename, list->name);
     strcat(filename, ".txt");
-    if ((file = fopen(filename, "w+t")) == NULL) {
+    if ((file = fopen(filename, "wt")) == NULL) {
         printf("Blad otwarcia pliku");
     } else {
         fprintf(file, "%s\n", list->name);
         if (list->score != NULL)
-            sign =getSign(list->score->differenceInPosition);
             fprintf(file, "%s %s %s %d %s%d\n", list->score->date, list->score->raceName, list->score->time,
-                    list->score->position, sign,list->score->differenceInPosition);
+                    list->score->position, getSign(list->score->differenceInPosition),
+                    list->score->differenceInPosition);
         while (list->score->next != NULL) {
-            sign =getSign(list->score->next->differenceInPosition);
             fprintf(file, "%s %s %s %d %s%d\n", list->score->next->date, list->score->next->raceName,
-                    list->score->next->time, list->score->next->position,sign,list->score->next->differenceInPosition);
+                    list->score->next->time, list->score->next->position,
+                    getSign(list->score->next->differenceInPosition), list->score->next->differenceInPosition);
             list->score = list->score->next;
         }
         fclose(file);
     }
-
 };
-void saveDriverList(struct Driver *list){
+
+void saveDriverList(Driver *list) {
     if(list!=NULL){
         saveDriverResultToFile(list);
         while (list->next!=NULL) {

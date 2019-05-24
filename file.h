@@ -7,12 +7,10 @@
 
 #include <stdio.h>
 #include <malloc.h>
+#include "driver.h"
 
-struct Driver *loadDataFromFile(char * fileName, struct Driver *list);
-void savedriverResultToFile(struct Driver *list);
-void saveDriverList(struct Driver *list);
+Driver *loadDataFromFile(char *fileName, Driver *list);
 
-void deleteLast(char *str, const char ch);
-void deleteFirst(char *str);
-char *getSign(int i);
+void saveDriverList(Driver *list);
+
 #endif //PROJEKT_FILE_H

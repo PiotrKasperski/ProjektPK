@@ -3,8 +3,8 @@
 //
 #include "raceScore.h"
 
-struct RaceScore *addScore(struct RaceScore *list,  char * raceName, char * date, char * time, int position, int differenceInPosition){
-   struct RaceScore *tmp = (struct RaceScore*)malloc(sizeof(struct RaceScore));
+RaceScore *addScore(RaceScore *list, char *raceName, char *date, char *time, int position, int differenceInPosition) {
+   RaceScore *tmp = (RaceScore *) malloc(sizeof(RaceScore));
    tmp->next = NULL;
    tmp->raceName = raceName;
    tmp->date = date;
@@ -20,9 +20,11 @@ struct RaceScore *addScore(struct RaceScore *list,  char * raceName, char * date
       return list;
    }
 };
-void deleteScores(struct RaceScore *list){
-   struct RaceScore *tmp;
+
+void deleteScores(RaceScore *list) {
+
 while(list!=NULL){
+   RaceScore *tmp;
    tmp = list;
    list=list->next;
    free(tmp);

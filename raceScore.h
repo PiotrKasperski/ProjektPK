@@ -6,16 +6,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define PROJEKT_RACE_H
- struct RaceScore{
+typedef struct RaceScore {
     char * raceName;
     char * date;
     char * time;
     int position;
     int differenceInPosition;
     struct RaceScore *next;
-};
+} RaceScore;
 
-struct RaceScore *addScore(struct RaceScore *list,  char * raceName, char * date, char * time, int position, int differenceInPosition);
-void deleteScores(struct RaceScore *list);
+RaceScore *addScore(RaceScore *list, char *raceName, char *date, char *time, int position, int differenceInPosition);
+
+void deleteScores(RaceScore *list);
 #endif //PROJEKT_RACE_H
 

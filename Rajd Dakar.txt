@@ -3,4 +3,3 @@ Rajd Dakar
 2, Robert Kubica, 3, 00:12:43
 1, Kajetan Kajetanowicz, 2, 00:13:15
 3, Krzysztof Holowczyc, 2, 00:14:01
-

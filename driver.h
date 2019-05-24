@@ -4,19 +4,23 @@
 #include "raceScore.h"
 #include <string.h>
 
-struct Driver {
+#ifndef PROJEKT_DRIVER_H
+#define PROJEKT_DRIVER_H
+
+typedef struct Driver {
     char *name;
-    struct RaceScore *score;
+    RaceScore *score;
     struct Driver *next;
-};
+} Driver;
 
 
-struct Driver *getDriver(struct Driver *list, char *driverName);
-
-struct Driver *addDriver(struct Driver *list, char *driverName);
-
-struct Driver *
-addDriverScore(struct Driver *list, char *driverName, char *raceName, char *date, char *time, int position,
+Driver *addDriverScore(Driver *list, char *driverName, char *raceName, char *date, char *time, int position,
                int differenceInPosition);
 
-void deleteDriverList(struct Driver *list);
+Driver *saveResults(char *result, char *raceName, char *date, Driver *list);
+
+void deleteDriverList(Driver *list);
+
+void deleteLast(char *str, const char ch);
+
+#endif //PROJEKT_DRIVER_H
